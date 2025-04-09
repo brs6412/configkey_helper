@@ -1,6 +1,6 @@
 # dbkeys
 
-> Helper tool for easy management of configuration files and keys that go along with each file.
+> Helper tool for easy management of configuration files and keys that go along with each file for Linux development environments.
 
 ## Description
 
@@ -11,6 +11,7 @@ The result is a string of keys that are single quoted, comma separated, and alph
 ## 🛠Requirements
 
 - Python 3.x
+- Linux-based operating system (Ubuntu, Fedora, etc.) for development and execution.
 
 ## Usage
 
