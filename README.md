@@ -19,7 +19,7 @@ The result is a string of keys that are single quoted, comma separated, and alph
 chmod +x dbkeys
 
 # Run the script
-./abc [options]
+./dbkeys [options]
 
 # Or with Python directly
-python abc [options]
+python dbkeys [options]
