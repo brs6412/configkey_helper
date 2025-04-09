@@ -1,0 +1,79 @@
+#!/usr/bin/env python3
+
+import json
+import os
+
+quit_opts = ['', '5', 'q', 'quit']
+
+def print_menu():
+    print()
+    print('---Config Key Helper---  ')
+    print('-----------------------  ')
+    print('----------Menu---------  ')
+    print('1.   (n)ew entry')
+    print('2.   (p)rint entries     ')
+    print('3.   (l)oad from file    ')
+    print('4.   (s)ave to file      ')
+    print('5.   (q)uit              ')
+
+def main():
+    print_menu()
+    config_dict = dict()
+    user_input = ' '
+    while user_input not in quit_opts:
+        user_input = input('\nEnter choice: ')
+        if user_input in ['1', 'n', 'new']:
+            file_name = input('Enter a file name: ')
+            if file_name in quit_opts:
+                continue
+            config_dict[file_name] = []
+            while user_input not in quit_opts:
+                user_input = input('Enter key: ')
+                if user_input not in quit_opts:
+                    config_dict[file_name].append(user_input)
+            config_dict[file_name].sort()
+        elif user_input in ['2', 'p', 'print']:
+            if config_dict:
+                user_input = input('Would you like config file names to be displayed? (y/n) ')
+                if user_input == 'n':
+                    combined_keys = list(set(key for keys in config_dict.values() for key in keys)).sort()
+                    result = ", ".join(f"'{item}'" for item in combined_keys)
+                    print(result)
+                elif user_input == 'y':
+                    for file, keys in config_dict:
+                        print(f'{file}: {keys.sort()} ')
+                else:
+                    print('Try again I guess? ')
+            else:
+                print('Enter some keys first!')
+        elif user_input in ['3', 'l', 'load']:
+            file_name = input('Enter save file [~/keys.json]: ')
+            if file_name == '':
+                file_name = '~/keys.json'
+            if os.path.exists(file_name):
+                with open(file_name, 'r') as f:
+                    file_dict = json.load(f)
+                user_input = input('Overwrite current dict [y]? ')
+                if user_input in ['', 'y']:
+                    if type(file_dict) == type(config_dict):
+                        config_dict = file_dict
+                    else:
+                        print(f'Invalid file read. Please verify {file_name} and try again.')
+            else:
+                print(f'Invalid file path {file_name}. Please try again.')
+        elif user_input in ['4', 's', 'save']:
+            if config_dict:
+                file_name = input('Enter save file [~/keys.json]: ')
+                if user_input == 'y':
+                    with open('~/keys.json', 'w ') as f:
+                        json.dump(config_dict, f, indent=4)
+            else:
+                print('Empty dict. Nothing to save!')
+        elif user_input in ['h', 'help']:
+            print_menu()
+        elif user_input in quit_opts:
+            break
+    print('Goodbye! ')
+
+if __name__ == "__main__":
+    main()
