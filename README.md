@@ -8,7 +8,7 @@ This script is a tool I wrote to assist with my tasks of updating configuration 
 Python dictionaries are the perfect solution for this task. A quick script can easily associate file names (keys) to their corresponding config keys (values). 
 The result is a string of keys that are single quoted, comma separated, and alphabetized for easy addition to a db patch.
 
-## 🛠Requirements
+## Requirements
 
 - Python 3.x
 - Linux-based operating system (Ubuntu, Fedora, etc.) for development and execution.
